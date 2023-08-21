@@ -3,22 +3,22 @@
     <div class="card">
       <div class="content">
         <div class="payment-form">
-          <div class="payment-tab" id="1">
+          <div class="payment-tab" @click="() => this.activeTab = 1">
             <img src="@/assets/credit-card.png" alt="">
             <span class="payment-name"> Cartão de crédito </span>
           </div>
-          <div class="payment-tab" id="2">
+          <div class="payment-tab" @click="() => this.activeTab = 2">
             <img src="@/assets/pix.png" alt="">
             <span class="payment-name"> Pix </span>
 
           </div>
-          <div class="payment-tab" id="3">
+          <div class="payment-tab" @click="() => this.activeTab = 3">
             <img src="@/assets/boleto.png" alt="">
             <span class="payment-name"> Boleto </span>
           </div>
         </div>
         <div class="payment-content">
-          <!-- <div class="content-tab" id="1">
+          <div class="content-tab" v-if="activeTab === 1">
             <div class="credit-card-container">
               <div class="card-input-container">
                 <div class="input-container">
@@ -31,7 +31,7 @@
                 </div>
                 <div class="input-container">
                   <span class="input-title"> CPF/CNPJ do Titular </span>
-                  <input v-mask="cpfCNPJMask" v-model="this.cpfCNPJ" class="input" type="text" name="CPF/CNPJ do Titular" id="card-document" placeholder="Para emissão da nota fiscal">
+                  <input v-mask="cpfCNPJMask" v-model="this.cpfCNPJCard" class="input" type="text" name="CPF/CNPJ do Titular" id="card-document" placeholder="Para emissão da nota fiscal">
                 </div>
                 <div class="security-container">
                   <div class="input-container">
@@ -66,8 +66,8 @@
                 <img class="credit-card-img" :src="creditCard" alt="">
               </div>
             </div>
-          </div> -->
-          <!-- <div class="content-tab" id="2">
+          </div>
+          <div class="content-tab" v-if="activeTab === 2">
             <div class="pix-container">
               <div class="pix-title-container">
                 <span class="pix-title"> Libere sua compra rapidamente pagando com o Pix! </span>
@@ -107,8 +107,8 @@
                 </div>
               </div>
             </div>
-          </div> -->
-          <div class="content-tab" id="3">
+          </div>
+          <div class="content-tab" v-if="activeTab === 3">
             <div class="billet-container">
               <div class="billet-title-container">
                 <span class="billet-title"> Atenção: </span>
@@ -181,8 +181,10 @@ export default {
   },
   data: function () {
     return {
+      activeTab: 1,
       cardNumber: '',
       cardName: '',
+      cpfCNPJCard: '',
       cpfCNPJ: '',
       cvv: '',
       cardMask: '################',
@@ -290,7 +292,7 @@ export default {
   flex-direction: column;
   width: 100%;
 }
-.pix-title-container, .pix-info-container {
+.pix-title-container, .pix-info-container, .billet-info-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -329,7 +331,7 @@ export default {
 }
 .billet-row {
   display: grid;
-  grid-template-columns: 3fr 3fr 3fr;
+  grid-template-columns: repeat(auto-fit, minmax(208px, 1fr));
   align-items: center;
   justify-content: center;
   gap: 12px;
