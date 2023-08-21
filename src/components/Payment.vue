@@ -18,20 +18,20 @@
           </div>
         </div>
         <div class="payment-content">
-          <div class="content-tab" id="1">
+          <!-- <div class="content-tab" id="1">
             <div class="credit-card-container">
               <div class="card-input-container">
                 <div class="input-container">
                   <span class="input-title"> Número do Cartão </span>
-                  <input class="input" type="text" name="Número do Cartão" id="card-number" placeholder="Digite somente os números">
+                  <input v-mask="cardMask" masked="false" class="input" v-model="this.cardNumber" type="text" name="Número do Cartão" id="card-number" placeholder="Digite somente os números">
                 </div>
                 <div class="input-container">
                   <span class="input-title"> Titular do Cartão </span>
-                  <input class="input" type="text" name="Titular do Cartão" id="card-name" placeholder="Digite o nome impresso no cartão">
+                  <input class="input" v-model="this.cardName" type="text" name="Titular do Cartão" id="card-name" placeholder="Digite o nome impresso no cartão">
                 </div>
                 <div class="input-container">
                   <span class="input-title"> CPF/CNPJ do Titular </span>
-                  <input class="input" type="text" name="CPF/CNPJ do Titular" id="card-document" placeholder="Para emissão da nota fiscal">
+                  <input v-mask="cpfCNPJMask" v-model="this.cpfCNPJ" class="input" type="text" name="CPF/CNPJ do Titular" id="card-document" placeholder="Para emissão da nota fiscal">
                 </div>
                 <div class="security-container">
                   <div class="input-container">
@@ -49,7 +49,7 @@
                   </div>
                   <div class="input-container">
                     <span class="input-title"> CVV </span>
-                    <input class="input" type="text" name="CVV" id="card-cvv" placeholder="CVV">
+                    <input v-mask="cvvMask" class="input" v-model="this.cvv" type="text" name="CVV" id="card-cvv" placeholder="CVV">
                   </div>
                 </div>
                 <div class="input-container">
@@ -66,9 +66,77 @@
                 <img class="credit-card-img" :src="creditCard" alt="">
               </div>
             </div>
+          </div> -->
+          <!-- <div class="content-tab" id="2">
+            <div class="pix-container">
+              <div class="pix-title-container">
+                <span class="pix-title"> Libere sua compra rapidamente pagando com o Pix! </span>
+              </div>
+              <div class="pix-info-container">
+                <div class="pix-row">
+                  <div class="pix-box">
+                    <div class="pix-image">
+                      <img src="@/assets/clock.png" alt="">
+                    </div>
+                    <span class="pix-title-info">Rápida aprovação</span>
+                    <span class="pix-subtitle-info">Pagamento em segundos, sem complicação.</span>
+                  </div>
+                  <div class="pix-box">
+                    <div class="pix-image">
+                      <img src="@/assets/qr-code.png" alt="">
+                    </div>
+                    <span class="pix-title-info">Facilidade na finalização</span>
+                    <span class="pix-subtitle-info">Basta escanear, com o aplicativo do seu banco, o QRCode que iremos gerar para sua compra.</span>
+                  </div>
+                </div>
+                <div class="pix-row">
+                  <div class="pix-box">
+                    <div class="pix-image">
+                      <img src="@/assets/shield.png" alt="">
+                    </div>
+                    <span class="pix-title-info">Maior segurança</span>
+                    <span class="pix-subtitle-info">O PIX foi desenvolvido pelo Banco Central para facilitar suas compras e é 100% seguro.</span>
+                  </div>
+                  <div class="pix-box">
+                    <div class="pix-image">
+                      <img src="@/assets/calendar.png" alt="">
+                    </div>
+                    <span class="pix-title-info">Tranquilidade na renovação</span>
+                    <span class="pix-subtitle-info">A cada renovação da assinatura enviaremos um código PIX. Assim, você fica sempre em dia sem se preocupar.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> -->
+          <div class="content-tab" id="3">
+            <div class="billet-container">
+              <div class="billet-title-container">
+                <span class="billet-title"> Atenção: </span>
+              </div>
+              <div class="billet-info-container">
+                <div class="billet-row">
+                  <div class="pix-box">
+                    <div class="pix-image">
+                      <img src="@/assets/clock.png" alt="">
+                    </div>
+                    <span class="pix-subtitle-info">Boletos levam até 3 dias úteis para serem compensados e então terem os produtos liberados.</span>
+                  </div>
+                  <div class="pix-box">
+                    <div class="pix-image">
+                      <img src="@/assets/mail.png" alt="">
+                    </div>
+                    <span class="pix-subtitle-info">Depois do pagamento, fique atento ao seu e-mail para receber os dados de acesso ao produto (verifique também a caixa de SPAM)</span>
+                  </div>
+                  <div class="pix-box">
+                    <div class="pix-image">
+                      <img src="@/assets/calendar.png" alt="">
+                    </div>
+                    <span class="pix-subtitle-info">A cada renovação da assinatura enviaremos um novo boleto para que você possa pagar. Assim, você fica sempre em dia sem se preocupar.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="content-tab" id="2"></div>
-          <div class="content-tab" id="3"></div>
         </div>
         <div class="purchase-details">
           <div class="details-title-container">
@@ -80,11 +148,15 @@
             <span class="product-name"> Nome do Produto </span>
             <span class="product-price"> R$ 500,00 / mês </span>
           </div>
-          <div class="charge">
+          <!-- <div class="charge">
             <img src="@/assets/credit-card-edit.png" alt="">
             <span class="charge-info">
               Essa cobrança aparecerá na sua fatura como: PAYT*NomeDoProduto
             </span>
+          </div> -->
+          <div class="pix-billet-container">
+            <span class="cpf-cnpj-title"> CPF/CNPJ (Para emissão de Nota Fiscal) </span>
+            <input v-mask="cpfCNPJMask" v-model="this.cpfCNPJ" class="input pix-billet-input" type="text" name="CPF/CNPJ" id="cpf-cnpj" placeholder="">
           </div>
         </div>
         <div class="buy-button-container">
@@ -100,12 +172,22 @@
 </template>
 
 <script>
+import {mask} from 'vue-the-mask'
+
 export default {
   name: 'PaymentData',
+  directives: {mask},
   props: {
   },
   data: function () {
     return {
+      cardNumber: '',
+      cardName: '',
+      cpfCNPJ: '',
+      cvv: '',
+      cardMask: '################',
+      cvvMask: '###',
+      cpfCNPJMask: ['###.###.###-##', '##.###.###/####-##'],
       month_selected: '',
       year_selected: '',
       installment_selected: '',
@@ -144,7 +226,6 @@ export default {
       {value: '1', label: '4x de R$ 125,00'},
       {value: '1', label: '5x de R$ 100,00'},
       ],
-      cardNumber: '5117981357021310',
       visaCard: /^4[0-9]{15}$/,
       masterCard: /^(50|5[6-9]|6007|6220|6304|6703|6708|6759|676[1-3])|((5(([1-2]|[4-5])[0-9]{8}|0((1|6)([0-9]{7}))|3(0(4((0|[2-9])[0-9]{5})|([0-3]|[5-9])[0-9]{6})|[1-9][0-9]{7})))|((508116)\\d{4,10})|((502121)\\d{4,10})|((589916)\\d{4,10})|(2[0-9]{15})|(67[0-9]{14})|(506387)\\d{4,10})/,
       dinersCard: /^3(?:0[0-5]|[68][0-9])[0-9]{11}$/,
@@ -181,6 +262,118 @@ export default {
   margin-bottom: 16px;
 }
 
+.pix-billet-input {
+  width: 55%;
+  box-sizing: border-box;
+}
+
+.pix-billet-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.cpf-cnpj-title {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 21px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #000000;
+}
+
+.pix-container, .billet-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.pix-title-container, .pix-info-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.billet-title-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+}
+.billet-title {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #707070;
+}
+
+.pix-info-container, .billet-info-container {
+  flex-direction: column;
+  row-gap: 16px;
+}
+
+.billet-info-container {
+  margin-bottom: 16px;
+}
+
+.pix-row {
+  display: grid;
+  grid-template-columns: 5fr 5fr;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.billet-row {
+  display: grid;
+  grid-template-columns: 3fr 3fr 3fr;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.pix-box{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #B0B0B0;
+  gap: 12px;
+  min-height: -webkit-fill-available;
+}
+
+.pix-title-info {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #212529;
+}
+
+.pix-subtitle-info {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 15px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #212529;
+}
+
+.pix-title {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #707070;
+}
+
 .payment-form {
   display: flex;
   align-items: center;
@@ -202,6 +395,7 @@ export default {
   border: 1px solid #B0B0B0;
   gap: 10px;
   cursor: pointer;
+  min-height: 40px;
 }
 
 .payment-name {

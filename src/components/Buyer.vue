@@ -4,16 +4,16 @@
       <div class="content">
         <div class="name-container">
           <span class="input-title"> Nome Completo </span>
-          <input class="input" type="text" name="Nome Completo" id="name" placeholder="Digite seu nome completo">
+          <input v-model="this.name" class="input" type="text" name="Nome Completo" id="name" placeholder="Digite seu nome completo">
         </div>
         <div class="contact-container">
           <div class="contact-input-container">
             <span class="input-title"> E-mail </span>
-            <input class="input" type="text" name="E-mail" id="e-mail" placeholder="Digite seu e-mail">
+            <input v-model="this.email" class="input" type="text" name="E-mail" id="e-mail" placeholder="Digite seu e-mail">
           </div>
           <div class="contact-input-container">
             <span class="input-title"> Telefone </span>
-            <input class="input" type="text" name="Telefone" id="tel" placeholder="(00) x0000-0000">
+            <input v-mask="phoneMask" v-model="this.phone" class="input" type="text" name="Telefone" id="tel" placeholder="(00) x0000-0000">
           </div>
         </div>
       </div>
@@ -23,10 +23,23 @@
 </template>
 
 <script>
+import {mask} from 'vue-the-mask'
+
 export default {
   name: 'BuyerData',
+  directives: {mask},
   props: {
-  }
+  },
+  data() {
+    return {
+      name: '',
+      email: '',
+      phone: '',
+      phoneMask: ['(##) ####-####', '(##) #####-####']
+    }
+  },
+  methods: {
+  },
 }
 </script>
 
