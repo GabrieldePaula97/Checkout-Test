@@ -28,17 +28,23 @@ import {mask} from 'vue-the-mask'
 export default {
   name: 'BuyerData',
   directives: {mask},
-  props: {
-  },
   data() {
     return {
       name: '',
       email: '',
       phone: '',
-      phoneMask: ['(##) ####-####', '(##) #####-####']
+      phoneMask: ['(##) ####-####', '(##) #####-####'],
     }
   },
   methods: {
+    emailValidation: () => {
+      // eslint-disable-next-line no-useless-escape
+      const emailCheck = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+      if (this.email.match(emailCheck)) {
+        return true; 
+      } 
+      return false; 
+    }
   },
 }
 </script>

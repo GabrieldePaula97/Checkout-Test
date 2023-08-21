@@ -3,16 +3,16 @@
     <div class="card">
       <div class="content">
         <div class="payment-form">
-          <div class="payment-tab" @click="() => this.activeTab = 1">
+          <div :class="activeTab === 1 ? 'payment-tab active':'payment-tab'" @click="() => this.activeTab = 1">
             <img src="@/assets/credit-card.png" alt="">
             <span class="payment-name"> Cartão de crédito </span>
           </div>
-          <div class="payment-tab" @click="() => this.activeTab = 2">
+          <div :class="activeTab === 2 ? 'payment-tab active':'payment-tab'" @click="() => this.activeTab = 2">
             <img src="@/assets/pix.png" alt="">
             <span class="payment-name"> Pix </span>
 
           </div>
-          <div class="payment-tab" @click="() => this.activeTab = 3">
+          <div :class="activeTab === 3 ? 'payment-tab active':'payment-tab'" @click="() => this.activeTab = 3">
             <img src="@/assets/boleto.png" alt="">
             <span class="payment-name"> Boleto </span>
           </div>
@@ -255,6 +255,16 @@ export default {
       }
     }
   },
+  methods: {
+    cpfCnpjValidation: (cpfCnpj) => {
+      // eslint-disable-next-line no-useless-escape
+      const cpfCnpjCheck =  /(^\d{3}\.\d{3}\.\d{3}\-\d{2}$)|(^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$)/;
+      if (cpfCnpj.match(cpfCnpjCheck)) {
+        return true; 
+      } 
+      return false; 
+    }
+  },
 }
 </script>
 
@@ -398,6 +408,11 @@ export default {
   gap: 10px;
   cursor: pointer;
   min-height: 40px;
+}
+
+.payment-tab.active {
+  background: rgba(255, 105, 5, .1);
+  border: 1px solid #FF6905;
 }
 
 .payment-name {

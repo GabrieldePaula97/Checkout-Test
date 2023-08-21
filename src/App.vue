@@ -15,7 +15,7 @@ export default {
     Product,
     Buyer,
     Payment
-}
+  }
 }
 </script>
 
